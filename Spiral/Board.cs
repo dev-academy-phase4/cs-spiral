@@ -1,4 +1,6 @@
-﻿namespace Spiral
+﻿using System.Linq;
+
+namespace Spiral
 {
     public class Board
     {
@@ -16,6 +18,14 @@
                     Cells[i][j] = '.';
                 }
             }
+        }
+
+        public override string ToString()
+        {
+            return Cells
+                .Select(row => new string(row) + "\n")
+                .Aggregate((a, b) => a + b)
+                .ToString();
         }
     }
 }

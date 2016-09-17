@@ -29,5 +29,47 @@ namespace SpiralTests
             // Assert
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void PlayerDisplays ()
+        {
+            // Arrange
+            var board = new Board(3, 3);
+            string expected = "@..\n...\n...\n";
+
+            // Act
+            board.Update();
+
+            // Assert
+            Assert.Equal(expected, board.ToString());
+        }
+
+        [Fact]
+        public void MovePlayerMovesPlayer ()
+        {
+            // Arrange
+            var board = new Board(3, 3);
+
+            // Act
+            board.MovePlayer("e");
+
+            // Assert
+            Assert.Equal(0, board.Player.Row);
+            Assert.Equal(1, board.Player.Col);
+        }
+
+        [Fact]
+        public void MovePlayerRespectsBoardBoundaries ()
+        {
+            // Arrange
+            var board = new Board(1, 1);
+
+            // Act
+            board.MovePlayer("s");
+
+            // Assert
+            Assert.Equal(0, board.Player.Row);
+            Assert.Equal(0, board.Player.Col);
+        }
     }
 }

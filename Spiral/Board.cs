@@ -4,19 +4,56 @@ namespace Spiral
 {
     public class Board
     {
+        private int _rows;
+        private int _cols;
+
         public char[][] Cells { get; set; }
+        public Player Player { get; set; }
 
         public Board(int rows, int cols)
         {
+            _rows = rows;
+            _cols = cols;
             Cells = new char[rows][];
-
             for (int i = 0; i < rows; i++)
             {
-                Cells[i] = new char[cols];
-                for (int j = 0; j < cols; j++)
+                Cells[i] = new char[_cols];
+            } 
+            BlankBoard();
+            Player = new Player();
+        }
+
+        public void BlankBoard ()
+        {
+            for (int i = 0; i < _rows; i++)
+            {
+                for (int j = 0; j < _cols; j++)
                 {
                     Cells[i][j] = '.';
                 }
+            }
+        }
+
+        public void Update()
+        {
+            BlankBoard();
+            Cells[Player.Row][Player.Col] = '@';
+        }
+
+        public bool MoveIsValid (string direction)
+        {
+            var p = new Player();
+            p.Row = Player.Row;
+            p.Col = Player.Col;
+            p.Move(direction);
+            return p.Row < _rows && p.Row >= 0 && p.Col < _cols && p.Col >= 0;
+        }
+
+        public void MovePlayer (string direction)
+        {
+            if (MoveIsValid(direction))
+            {
+                Player.Move(direction);
             }
         }
 

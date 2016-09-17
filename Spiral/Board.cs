@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Collections.Generic;
 
 namespace Spiral
 {
@@ -9,8 +10,23 @@ namespace Spiral
 
         public char[][] Cells { get; set; }
         public Player Player { get; set; }
+        public IEnumerable<Obstacle> Obstacles { get; set; }
 
         public Board(int rows, int cols)
+        {
+            InitialiseCells(rows, cols);
+            Player = new Player();
+            Obstacles = new List<Obstacle>();
+        }
+
+        public Board(int rows, int cols, IEnumerable<Obstacle> obstacles)
+        {
+            InitialiseCells(rows, cols);
+            Player = new Player();
+            Obstacles = obstacles;
+        }
+
+        private void InitialiseCells (int rows, int cols)
         {
             _rows = rows;
             _cols = cols;
@@ -20,7 +36,6 @@ namespace Spiral
                 Cells[i] = new char[_cols];
             } 
             BlankBoard();
-            Player = new Player();
         }
 
         public void BlankBoard ()
@@ -46,7 +61,9 @@ namespace Spiral
             p.Row = Player.Row;
             p.Col = Player.Col;
             p.Move(direction);
-            return p.Row < _rows && p.Row >= 0 && p.Col < _cols && p.Col >= 0;
+            bool insideBoundaries = p.Row < _rows && p.Row >= 0 && p.Col < _cols && p.Col >= 0;
+            bool notOnObstacle= !Obstacles.Any(o => o.Col == p.Col && o.Row == p.Row);
+            return insideBoundaries && notOnObstacle;
         }
 
         public void MovePlayer (string direction)

@@ -23,6 +23,10 @@ namespace Spiral
         {
             InitialiseCells(rows, cols);
             Player = new Player();
+            if (obstacles.Any(o => o.Row >= rows || o.Col >= cols))
+            {
+                throw new System.ArgumentOutOfRangeException("Obstacle outside board boundaries!");
+            }
             Obstacles = obstacles;
         }
 

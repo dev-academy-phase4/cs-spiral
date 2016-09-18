@@ -100,5 +100,16 @@ namespace SpiralTests
             Assert.Equal(0, board.Player.Row);
             Assert.Equal(0, board.Player.Col);
         }
+
+        [Fact]
+        public void ThrowsIfObstaclesOutsideBoard ()
+        {
+            // Arrange
+            var o = new Obstacle(2, 0);
+
+            // Act & Assert
+            Assert.Throws<System.ArgumentOutOfRangeException>(() => 
+                new Board(1, 1, new List<Obstacle> { o }));
+        }
     }
 }

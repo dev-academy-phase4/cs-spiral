@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Collections.Generic;
 
 namespace Spiral
@@ -20,7 +19,7 @@ namespace Spiral
             Obstacles = new List<Obstacle>();
         }
 
-        public Board(int rows, int cols, IEnumerable<Obstacle> obstacles)
+        public Board (int rows, int cols, IEnumerable<Obstacle> obstacles)
         {
             InitialiseCells(rows, cols);
             Player = new Player();
@@ -29,6 +28,13 @@ namespace Spiral
                 throw new System.ArgumentOutOfRangeException("Obstacle outside board boundaries!");
             }
             Obstacles = obstacles;
+        }
+
+        public Board (string[] rows)
+        {
+            InitialiseCells(rows.Length, rows[0].Length);
+            Player = new Player();
+            Obstacles = MapLoader.GetObstacles(rows);
         }
 
         private void InitialiseCells (int rows, int cols)

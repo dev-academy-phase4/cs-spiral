@@ -130,5 +130,27 @@ namespace SpiralTests
             // Assert
             Assert.Equal(expected, board.ToString());
         }
+
+        [Fact]
+        public void ConstructBoardFromArray ()
+        {
+            // Arrange
+            var map = new string[]
+            {
+                "....#",
+                "...#.",
+                "..#..",
+                ".#...",
+                "#...."
+            };
+            var expected = "@...#\n...#.\n..#..\n.#...\n#....\n";
+
+            // Act
+            var board = new Board(map);
+            board.Update();
+
+            // Assert
+            Assert.Equal(expected, board.ToString());
+        }
     }
 }

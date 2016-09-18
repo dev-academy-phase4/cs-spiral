@@ -111,5 +111,24 @@ namespace SpiralTests
             Assert.Throws<System.ArgumentOutOfRangeException>(() => 
                 new Board(1, 1, new List<Obstacle> { o }));
         }
+
+        [Fact]
+        public void ObstaclesDisplay ()
+        {
+            // Arrange
+            string expected = "@#\n##\n";
+            var board = new Board(2, 2, new List<Obstacle>
+            {
+                new Obstacle(0, 1),
+                new Obstacle(1, 0),
+                new Obstacle(1, 1)
+            });
+
+            // Act
+            board.Update();
+
+            // Assert
+            Assert.Equal(expected, board.ToString());
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Spiral
@@ -57,6 +58,10 @@ namespace Spiral
         {
             BlankBoard();
             Cells[Player.Row][Player.Col] = '@';
+            foreach(Obstacle o in Obstacles)
+            {
+                Cells[o.Row][o.Col] = '#';
+            }
         }
 
         public bool MoveIsValid (string direction)

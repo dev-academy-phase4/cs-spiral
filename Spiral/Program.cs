@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Spiral
 {
@@ -6,7 +7,19 @@ namespace Spiral
     {
         static void Main(string[] args)
         {
-            var board = new Board(10, 10);
+            var obstacles = new List<Obstacle> { new Obstacle(1, 1) };
+
+            Board board;
+            try
+            {
+                board = new Board(3, 3, obstacles);
+            }
+            catch(System.ArgumentOutOfRangeException)
+            {
+                Console.WriteLine("An error prevented the game board from being created.");
+                Console.ReadLine();
+                return;
+            }
             board.Update();
             Console.Clear();
             Console.Write(board);

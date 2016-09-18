@@ -20,15 +20,16 @@ namespace Spiral
                 Console.ReadLine();
                 return;
             }
-            board.Update();
-            Console.Clear();
-            Console.Write(board);
 
             string key = "";
-            while((key = Console.ReadKey(true).KeyChar.ToString()) != "q")
+            do
             {
-                Console.WriteLine(key);
-                switch(key)
+                board.Update();
+                Console.Clear();
+                Console.Write(board);
+
+                key = Console.ReadKey(true).KeyChar.ToString();
+                switch (key)
                 {
                     case "w":
                         board.MovePlayer("n");
@@ -46,10 +47,7 @@ namespace Spiral
                         board.MovePlayer("e");
                         break;
                 }
-                board.Update();
-                Console.Clear();
-                Console.Write(board);
-            }
+            } while (key != "q");
         }
     }
 }

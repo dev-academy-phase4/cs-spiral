@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,6 +24,11 @@ namespace Spiral
                 obstacles = obstacles.Concat(GetObstaclesFromRow(src[i], i)).ToList();
             }
             return obstacles;
+        }
+
+        public static string[] LoadMap ()
+        {
+            return File.ReadAllLines("map");
         }
     }
 }

@@ -1,21 +1,25 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace Spiral
 {
     public static class BoardDisplayer
     {
-        public static void Output (string board)
+        public static string AddSpaces (string board)
         {
-            foreach (char cell in board)
+            return Regex.Replace(board, ".{1}", "$0 ");
+        }
+
+        public static void Output (Board board)
+        {
+            string boardStr = AddSpaces(board.ToString());
+            Console.SetCursorPosition(0, 0);
+            foreach (char cell in boardStr)
             {
                 switch (cell)
                 {
                     default:
                         Console.ResetColor();
-                        break;
-
-                    case '@':
-                        Console.ForegroundColor = ConsoleColor.Red;
                         break;
 
                     case '#':
@@ -28,6 +32,7 @@ namespace Spiral
                 }
                 Console.Write(cell);
             }
+            board.Player.Write();
         }
     }
 }

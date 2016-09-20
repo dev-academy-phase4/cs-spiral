@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Spiral
@@ -63,10 +64,10 @@ namespace Spiral
         public void Update()
         {
             BlankBoard();
-            Cells[Player.Row][Player.Col] = '@';
-            foreach(Obstacle o in Obstacles)
+            Player.Write();
+            foreach (var obstacle in Obstacles)
             {
-                Cells[o.Row][o.Col] = '#';
+                Cells[obstacle.Row][obstacle.Col] = '#';
             }
         }
 
@@ -85,7 +86,9 @@ namespace Spiral
         {
             if (MoveIsValid(direction))
             {
+                Player.Clear();
                 Player.Move(direction);
+                Player.Write();
             }
         }
 

@@ -21,13 +21,13 @@ namespace Spiral
                 return;
             }
 
+            Console.CursorVisible = false;
+            board.Update();
+            BoardDisplayer.Output(board);
+
             string key = "";
             do
             {
-                board.Update();
-                Console.Clear();
-                BoardDisplayer.Output(board.ToString());
-
                 key = Console.ReadKey(true).KeyChar.ToString();
                 switch (key)
                 {

@@ -33,20 +33,6 @@ namespace SpiralTests
         }
 
         [Fact]
-        public void PlayerDisplays ()
-        {
-            // Arrange
-            var board = new Board(3, 3);
-            string expected = "@..\n...\n...\n";
-
-            // Act
-            board.Update();
-
-            // Assert
-            Assert.Equal(expected, board.ToString());
-        }
-
-        [Fact]
         public void MovePlayerMovesPlayer ()
         {
             // Arrange
@@ -116,7 +102,7 @@ namespace SpiralTests
         public void ObstaclesDisplay ()
         {
             // Arrange
-            string expected = "@#\n##\n";
+            string expected = ".#\n##\n";
             var board = new Board(2, 2, new List<Obstacle>
             {
                 new Obstacle(0, 1),
@@ -143,7 +129,7 @@ namespace SpiralTests
                 ".#...",
                 "#...."
             };
-            var expected = "@...#\n...#.\n..#..\n.#...\n#....\n";
+            var expected = "....#\n...#.\n..#..\n.#...\n#....\n";
 
             // Act
             var board = new Board(map);

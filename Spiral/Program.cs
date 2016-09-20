@@ -7,12 +7,12 @@ namespace Spiral
     {
         static void Main(string[] args)
         {
-            var obstacles = new List<Obstacle> { new Obstacle(1, 1) };
+            string[] map = MapLoader.LoadMap();
 
             Board board;
             try
             {
-                board = new Board(3, 3, obstacles);
+                board = new Board(map);
             }
             catch(System.ArgumentOutOfRangeException)
             {
@@ -26,7 +26,7 @@ namespace Spiral
             {
                 board.Update();
                 Console.Clear();
-                Console.Write(board);
+                BoardDisplayer.Output(board.ToString());
 
                 key = Console.ReadKey(true).KeyChar.ToString();
                 switch (key)

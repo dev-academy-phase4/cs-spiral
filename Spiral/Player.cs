@@ -74,14 +74,6 @@ namespace Spiral
             }
         }
 
-        public void Clear ()
-        {
-            Console.SetCursorPosition(DisplayCol, DisplayRow);
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.Write('.');
-            Console.ResetColor();
-        }
-
         public void Write ()
         {
             Console.SetCursorPosition(DisplayCol, DisplayRow);

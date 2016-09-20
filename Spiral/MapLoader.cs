@@ -26,9 +26,9 @@ namespace Spiral
             return obstacles;
         }
 
-        public static string[] LoadMap ()
+        public static string[] LoadMap (int level)
         {
-            return File.ReadAllLines("map");
+            return File.ReadAllLines("map" + level);
         }
     }
 }

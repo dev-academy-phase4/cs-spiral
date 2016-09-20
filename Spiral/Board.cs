@@ -10,11 +10,13 @@ namespace Spiral
         private int _cols;
 
         public char[][] Cells { get; set; }
+        public bool Exit { get; set; }
         public Player Player { get; set; }
         public IEnumerable<Obstacle> Obstacles { get; set; }
 
         public Board(int rows, int cols)
         {
+            Exit = true;
             InitialiseCells(rows, cols);
             Player = new Player();
             Obstacles = new List<Obstacle>();
@@ -22,6 +24,7 @@ namespace Spiral
 
         public Board (int rows, int cols, IEnumerable<Obstacle> obstacles)
         {
+            Exit = true;
             InitialiseCells(rows, cols);
             Player = new Player();
             if (obstacles.Any(o => o.Row >= rows || o.Col >= cols))
@@ -33,9 +36,14 @@ namespace Spiral
 
         public Board (string[] rows)
         {
-            InitialiseCells(rows.Length, rows[0].Length);
+            Exit = true;
+            InitialiseCells(rows);
             Player = new Player();
             Obstacles = MapLoader.GetObstacles(rows);
+            if (Obstacles.Any(o => o.Row >= rows.Length || o.Col >= rows[0].Length))
+            {
+                throw new System.ArgumentOutOfRangeException("Obstacle outside board boundaries!");
+            }
         }
 
         private void InitialiseCells (int rows, int cols)
@@ -47,28 +55,22 @@ namespace Spiral
             {
                 Cells[i] = new char[_cols];
             } 
-            BlankBoard();
         }
 
-        public void BlankBoard ()
+        private void InitialiseCells (string[] rows)
         {
-            for (int i = 0; i < _rows; i++)
+            _rows = rows.Length;
+            _cols = rows[0].Length;
+            Cells = new char[rows.Length][];
+            for (int i = 0; i < Cells.Length; i++)
             {
-                for (int j = 0; j < _cols; j++)
-                {
-                    Cells[i][j] = '.';
-                }
-            }
+                Cells[i] = rows[i].ToCharArray();
+            } 
         }
 
         public void Update()
         {
-            BlankBoard();
             Player.Write();
-            foreach (var obstacle in Obstacles)
-            {
-                Cells[obstacle.Row][obstacle.Col] = '#';
-            }
         }
 
         public bool MoveIsValid (string direction)
@@ -84,12 +86,22 @@ namespace Spiral
 
         public void MovePlayer (string direction)
         {
+            if (direction == "x" && Cells[Player.Row][Player.Col] == 'X')
+            {
+                Exit = true;
+                return;
+            }
             if (MoveIsValid(direction))
             {
-                Player.Clear();
+                ClearPlayerPosition();
                 Player.Move(direction);
                 Player.Write();
             }
+        }
+
+        public void ClearPlayerPosition ()
+        {
+            BoardDisplayer.OutputCell(Cells[Player.Row][Player.Col], Player.DisplayCol, Player.DisplayRow);
         }
 
         public override string ToString()

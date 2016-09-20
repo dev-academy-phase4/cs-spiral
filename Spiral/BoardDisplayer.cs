@@ -16,23 +16,43 @@ namespace Spiral
             Console.SetCursorPosition(0, 0);
             foreach (char cell in boardStr)
             {
-                switch (cell)
-                {
-                    default:
-                        Console.ResetColor();
-                        break;
-
-                    case '#':
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        break;
-
-                    case '.':
-                        Console.ForegroundColor = ConsoleColor.Gray;
-                        break;
-                }
+                SetColor(cell);
                 Console.Write(cell);
             }
             board.Player.Write();
+        }
+
+        public static void OutputCell (char cell, int col, int row)
+        {
+            Console.SetCursorPosition(col, row);
+            SetColor(cell);
+            Console.Write(cell);
+        }
+
+        private static void SetColor (char cell)
+        {
+            switch (cell)
+            {
+                default:
+                    Console.ResetColor();
+                    break;
+
+                case '#':
+                    Console.ForegroundColor = ConsoleColor.White;
+                    break;
+
+                case '.':
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    break;
+
+                case 'X':
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    break;
+
+                case '$':
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    break;
+            }
         }
     }
 }

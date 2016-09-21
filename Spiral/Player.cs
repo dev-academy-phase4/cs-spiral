@@ -2,12 +2,14 @@
 
 namespace Spiral
 {
-    public class Player
+    public class Player : IDisplayableCreature
     {
         public int Row { get; set; }
         public int Col { get; set; }
         public int DisplayRow { get; set; }
         public int DisplayCol { get; set; }
+        public char Avatar { get; }
+        public ConsoleColor Color { get; }
 
         private int _width;
 
@@ -18,6 +20,8 @@ namespace Spiral
             Col = 0;
             DisplayCol = 0;
             _width = width;
+            Avatar = '@';
+            Color = ConsoleColor.Red;
         }
 
         public void Move (string direction)
@@ -77,8 +81,8 @@ namespace Spiral
         public void Write ()
         {
             Console.SetCursorPosition(DisplayCol, DisplayRow);
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write('@');
+            Console.ForegroundColor = Color;
+            Console.Write(Avatar);
             Console.ResetColor();
         }
     }

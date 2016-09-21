@@ -96,6 +96,21 @@ namespace Spiral
                 ClearPlayerPosition();
                 Player.Move(direction);
                 Player.Write();
+                DisplayMessages();
+            }
+        }
+
+        public void DisplayMessages ()
+        {
+            switch(Cells[Player.Row][Player.Col])
+            {
+                case 'X':
+                    MessageDisplayer.Alert("Hit 'x' to exit!");
+                    break;
+
+                case '$':
+                    MessageDisplayer.Alert("Look at all that wealth! To... redistribute among the poor...");
+                    break;
             }
         }
 

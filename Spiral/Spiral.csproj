@@ -45,7 +45,10 @@
   <ItemGroup>
     <Compile Include="Board.cs" />
     <Compile Include="BoardDisplayer.cs" />
+    <Compile Include="IDisplayableCreature.cs" />
     <Compile Include="MapLoader.cs" />
+    <Compile Include="MessageDisplayer.cs" />
+    <Compile Include="Monster.cs" />
     <Compile Include="Obstacle.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />

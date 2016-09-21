@@ -37,5 +37,16 @@ namespace SpiralTests
             Assert.Equal(1, actual.Last().Row);
             Assert.Equal(0, actual.Last().Col);
         }
+
+        [Fact]
+        public void GetMonstersFromRow ()
+        {
+            // Arrange & Act
+            IEnumerable<Monster> actual = MapLoader.GetMonstersFromRow(".#M", 0);
+
+            // Actual
+            Assert.Equal(0, actual.First().Row);
+            Assert.Equal(2, actual.First().Col);
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace Spiral
         static void Main(string[] args)
         {
             int currentLevel = 0;
-            var board = new Board(0, 0);
+            var board = new Board();
 
             string key = "";
             do

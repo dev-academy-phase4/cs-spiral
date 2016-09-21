@@ -11,7 +11,7 @@ namespace SpiralTests
         public void BoardGeneratedFiveByFive ()
         {
             // Arrange & Act
-            var board = new Board(5, 5);
+            var board = new Board(new string[] { ".....", ".....", ".....", ".....", "....." });
 
             // Assert
             Assert.Equal(5, board.Cells.Length);
@@ -22,7 +22,7 @@ namespace SpiralTests
         public void MovePlayerMovesPlayer ()
         {
             // Arrange
-            var board = new Board(3, 3);
+            var board = new Board(new string[] { "...", "...", "..." });
 
             // Act
             board.MovePlayer("e");
@@ -36,7 +36,7 @@ namespace SpiralTests
         public void MovePlayerRespectsBoardBoundaries ()
         {
             // Arrange
-            var board = new Board(1, 1);
+            var board = new Board(new string[] { "." });
 
             // Act
             board.MovePlayer("s");
@@ -49,11 +49,8 @@ namespace SpiralTests
         [Fact]
         public void BoardCanHaveObstacles ()
         {
-            // Arrange
-            var obstacles = new List<Obstacle> { new Obstacle(0, 0) };
-
-            // Act
-            var board = new Board(1, 1, obstacles);
+            // Arrange & Act
+            var board = new Board(new string[] { ".#" });
 
             // Assert
             Assert.Equal(1, board.Obstacles.Count());
@@ -63,7 +60,7 @@ namespace SpiralTests
         public void BoardWontMovePlayerOntoObstacle ()
         {
             // Arrange
-            var board = new Board(2, 1, new List<Obstacle> { new Obstacle(1, 0) });
+            var board = new Board(new string[] { ".", "#" });
 
             // Act
             board.MovePlayer("s");
@@ -76,12 +73,9 @@ namespace SpiralTests
         [Fact]
         public void ThrowsIfObstaclesOutsideBoard ()
         {
-            // Arrange
-            var o = new Obstacle(2, 0);
-
-            // Act & Assert
+            // Arrange, Act & Assert
             Assert.Throws<System.ArgumentOutOfRangeException>(() => 
-                new Board(1, 1, new List<Obstacle> { o }));
+                new Board(new string[] { "...", "...", "...    #" }));
         }
 
         [Fact]

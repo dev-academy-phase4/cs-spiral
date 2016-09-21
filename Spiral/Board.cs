@@ -15,24 +15,9 @@ namespace Spiral
         public IEnumerable<Monster> Monsters { get; set; }
         public IEnumerable<Obstacle> Obstacles { get; set; }
 
-        public Board(int rows, int cols)
+        public Board()
         {
             Exit = true;
-            InitialiseCells(rows, cols);
-            Player = new Player();
-            Obstacles = new List<Obstacle>();
-        }
-
-        public Board (int rows, int cols, IEnumerable<Obstacle> obstacles)
-        {
-            Exit = true;
-            InitialiseCells(rows, cols);
-            Player = new Player();
-            if (obstacles.Any(o => o.Row >= rows || o.Col >= cols))
-            {
-                throw new System.ArgumentOutOfRangeException("Obstacle outside board boundaries!");
-            }
-            Obstacles = obstacles;
         }
 
         public Board (string[] rows)

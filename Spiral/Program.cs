@@ -34,9 +34,9 @@ namespace Spiral
                     }
 
                     Console.CursorVisible = false;
-                    board.Update();
                     BoardDisplayer.Output(board);
                 }
+                board.Update();
                 key = Console.ReadKey(true).KeyChar.ToString();
                 switch (key)
                 {

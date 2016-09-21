@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spiral
 {
@@ -12,8 +8,9 @@ namespace Spiral
         public int Col { get; private set; }
         public int DisplayRow { get; set; }
         public int DisplayCol { get; set; }
-        public char Avatar { get; }
-        public ConsoleColor Color { get; }
+        public char Avatar { get; set; }
+        public ConsoleColor Color { get; set; }
+        public bool Vanquished { get; set; }
 
         private int _width;
 
@@ -22,10 +19,17 @@ namespace Spiral
             Row = row;
             DisplayRow = row;
             Col = col;
-            DisplayCol = col;
+            DisplayCol = col > 0 ? col * width : 0;
             _width = width;
             Color = ConsoleColor.Blue;
             Avatar = avatar;
+        }
+
+        public void DisplayDefeatedForm ()
+        {
+            Color = ConsoleColor.DarkRed;
+            Avatar = '*';
+            Write();
         }
 
         public void Write ()

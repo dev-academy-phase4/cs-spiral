@@ -4,9 +4,11 @@
     {
         int DisplayRow { get; set; }
         int DisplayCol { get; set; }
-        char Avatar { get; }
-        System.ConsoleColor Color { get; }
+        char Avatar { get; set; }
+        System.ConsoleColor Color { get; set; }
+        bool Vanquished { get; set; }
 
-        void Write();
+        void DisplayDefeatedForm ();
+        void Write ();
     }
 }

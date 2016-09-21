@@ -8,8 +8,9 @@ namespace Spiral
         public int Col { get; set; }
         public int DisplayRow { get; set; }
         public int DisplayCol { get; set; }
-        public char Avatar { get; }
-        public ConsoleColor Color { get; }
+        public char Avatar { get; set; }
+        public ConsoleColor Color { get; set; }
+        public bool Vanquished { get; set; }
 
         private int _width;
 
@@ -76,6 +77,20 @@ namespace Spiral
                     DisplayCol -= _width;
                     break;
             }
+        }
+
+        public void Vanquish (IDisplayableCreature monster)
+        {
+            monster.Vanquished = true;
+            monster.DisplayDefeatedForm();
+            MessageDisplayer.Alert("You vanquished the monster!");
+        }
+
+        public void DisplayDefeatedForm ()
+        {
+            Color = ConsoleColor.DarkRed;
+            Avatar = '!';
+            Write();
         }
 
         public void Write ()

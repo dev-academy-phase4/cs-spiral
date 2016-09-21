@@ -12,6 +12,7 @@ namespace Spiral
         public char[][] Cells { get; set; }
         public bool Exit { get; set; }
         public Player Player { get; set; }
+        public IEnumerable<Monster> Monsters { get; set; }
         public IEnumerable<Obstacle> Obstacles { get; set; }
 
         public Board(int rows, int cols)
@@ -40,6 +41,7 @@ namespace Spiral
             InitialiseCells(rows);
             Player = new Player();
             Obstacles = MapLoader.GetObstacles(rows);
+            Monsters = MapLoader.GetMonsters(rows);
             if (Obstacles.Any(o => o.Row >= rows.Length || o.Col >= rows[0].Length))
             {
                 throw new System.ArgumentOutOfRangeException("Obstacle outside board boundaries!");
@@ -84,12 +86,26 @@ namespace Spiral
             return insideBoundaries && notOnObstacle;
         }
 
+        public Monster MoveEncountersMonster (string direction)
+        {
+            var p = new Player();
+            p.Row = Player.Row;
+            p.Col = Player.Col;
+            p.Move(direction);
+            return Monsters.FirstOrDefault(m => m.Row == p.Row && m.Col == p.Col);
+        }
+
         public void MovePlayer (string direction)
         {
             if (direction == "x" && Cells[Player.Row][Player.Col] == 'X')
             {
                 Exit = true;
                 return;
+            }
+            var m = MoveEncountersMonster(direction);
+            if (m != null)
+            {
+                Player.Vanquish(m);
             }
             if (MoveIsValid(direction))
             {
@@ -109,13 +125,19 @@ namespace Spiral
                     break;
 
                 case '$':
-                    MessageDisplayer.Alert("Look at all that wealth! To... redistribute among the poor...");
+                    MessageDisplayer.Alert("Wealth! To... redistribute among the poor...");
                     break;
             }
         }
 
         public void ClearPlayerPosition ()
         {
+            var monster = Monsters.FirstOrDefault(m => m.Col == Player.Col && m.Row == Player.Row);
+            if (monster != null)
+            {
+                monster.Write();
+                return;
+            }
             BoardDisplayer.OutputCell(Cells[Player.Row][Player.Col], Player.DisplayCol, Player.DisplayRow);
         }
 

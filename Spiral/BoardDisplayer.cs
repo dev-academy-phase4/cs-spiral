@@ -52,6 +52,10 @@ namespace Spiral
                 case '$':
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     break;
+
+                case '*':
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    break;
             }
         }
     }

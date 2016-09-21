@@ -62,6 +62,7 @@
     <Compile Include="BoardDisplayerTests.cs" />
     <Compile Include="BoardTests.cs" />
     <Compile Include="MapLoaderTests.cs" />
+    <Compile Include="MonsterTests.cs" />
     <Compile Include="ObstacleTests.cs" />
     <Compile Include="PlayerTests.cs" />
     <Compile Include="ProgramTests.cs" />

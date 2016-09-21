@@ -19,20 +19,6 @@ namespace SpiralTests
         }
 
         [Fact]
-        public void BoardGeneratedSixByTwo ()
-        {
-            // Arrange
-            string expected = "..\n..\n..\n..\n..\n..\n";
-
-            // Act
-            var board = new Board(6, 2);
-            var actual = board.ToString();
-
-            // Assert
-            Assert.Equal(expected, actual);
-        }
-
-        [Fact]
         public void MovePlayerMovesPlayer ()
         {
             // Arrange
@@ -96,25 +82,6 @@ namespace SpiralTests
             // Act & Assert
             Assert.Throws<System.ArgumentOutOfRangeException>(() => 
                 new Board(1, 1, new List<Obstacle> { o }));
-        }
-
-        [Fact]
-        public void ObstaclesDisplay ()
-        {
-            // Arrange
-            string expected = ".#\n##\n";
-            var board = new Board(2, 2, new List<Obstacle>
-            {
-                new Obstacle(0, 1),
-                new Obstacle(1, 0),
-                new Obstacle(1, 1)
-            });
-
-            // Act
-            board.Update();
-
-            // Assert
-            Assert.Equal(expected, board.ToString());
         }
 
         [Fact]

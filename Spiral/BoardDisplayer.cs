@@ -20,6 +20,9 @@ namespace Spiral
                 Console.Write(cell);
             }
             board.Player.Write();
+            MessageDisplayer.Kindness(10);
+            MessageDisplayer.Guile(10);
+            MessageDisplayer.Sagacity(10);
         }
 
         public static void OutputCell (char cell, int col, int row)

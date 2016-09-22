@@ -12,7 +12,7 @@ namespace Spiral
         public ConsoleColor Color { get; set; }
         public bool Vanquished { get; set; }
 
-        private int _width;
+        private readonly int _width;
 
         public Player (int width = 2)
         {

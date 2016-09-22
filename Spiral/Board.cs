@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Collections.Generic;
 
 namespace Spiral
@@ -62,9 +61,11 @@ namespace Spiral
 
         public bool MoveIsValid (string direction)
         {
-            var p = new Player();
-            p.Row = Player.Row;
-            p.Col = Player.Col;
+            var p = new Player
+            {
+                Row = Player.Row,
+                Col = Player.Col
+            };
             p.Move(direction);
             bool insideBoundaries = p.Row < _rows && p.Row >= 0 && p.Col < _cols && p.Col >= 0;
             bool notOnObstacle= !Obstacles.Any(o => o.Col == p.Col && o.Row == p.Row);
@@ -73,9 +74,11 @@ namespace Spiral
 
         public Monster MoveEncountersMonster (string direction)
         {
-            var p = new Player();
-            p.Row = Player.Row;
-            p.Col = Player.Col;
+            var p = new Player
+            {
+                Row = Player.Row,
+                Col = Player.Col
+            };
             p.Move(direction);
             return Monsters.FirstOrDefault(m => m.Row == p.Row && m.Col == p.Col);
         }
@@ -92,23 +95,20 @@ namespace Spiral
             {
                 Player.Vanquish(m);
             }
-            if (MoveIsValid(direction))
-            {
-                ClearPlayerPosition();
-                Player.Move(direction);
-                Player.Write();
-                DisplayMessages();
-            }
+            if (!MoveIsValid(direction)) return;
+            ClearPlayerPosition();
+            Player.Move(direction);
+            Player.Write();
+            DisplayMessages();
         }
 
         public void DisplayMessages ()
         {
-            switch(Cells[Player.Row][Player.Col])
+            switch (Cells[Player.Row][Player.Col])
             {
                 case 'X':
                     MessageDisplayer.Alert("Hit 'x' to exit!");
                     break;
-
                 case '$':
                     MessageDisplayer.Alert("Wealth! To... redistribute among the poor...");
                     break;

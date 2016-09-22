@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace Spiral
 {
-    class Program
+    internal class Program
     {
-        static Board NewLevel (int level)
+        private static Board NewLevel (int level)
         {
             Console.Clear();
             return new Board(MapLoader.LoadMap(level));
         }
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             int currentLevel = 0;
             var board = new Board();

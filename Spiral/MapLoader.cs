@@ -11,7 +11,7 @@ namespace Spiral
         {
             return src
                 .ToArray()
-                .Select((c, col) => Tuple.Create<char, int>(c, col))
+                .Select(Tuple.Create<char, int>)
                 .Where(tuple => tuple.Item1 == '#')
                 .Select(tuple => new Obstacle(row, tuple.Item2));
         }
@@ -30,7 +30,7 @@ namespace Spiral
         {
             return src
                 .ToArray()
-                .Select((c, col) => Tuple.Create<char, int>(c, col))
+                .Select(Tuple.Create<char, int>)
                 .Where(tuple => tuple.Item1 == 'M')
                 .Select(tuple => new Monster(row, tuple.Item2));
         }
